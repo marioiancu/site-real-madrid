@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Madrid Team Members</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      header {
+        background-color: #f8f9fa;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 20px;
+        flex: 1;
+        overflow: auto;
+      }
+      .team-member {
+        background-color: #e9ecef;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .team-member img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+      .team-member h3 {
+        margin: 0;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Real Madrid Team Members</h1>
+      <nav>
+        <a href="/">Home</a> |
+        <a href="/teams">Teams</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <% teamMembers.forEach(member => { %>
+      <div class="team-member" onclick="changeborder(event);">
+        <img src="<%= member.photo %>" alt="<%= member.name %>" />
+        <h3><%= member.name %></h3>
+        <div class="stats"></div>
+      </div>
+      <% }) %>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        function getRandomStat() {
+          const stats = [
+            `Goals: ${Math.floor(Math.random() * 50)}`,
+            `Matches: ${Math.floor(Math.random() * 100)}`,
+            `Assists: ${Math.floor(Math.random() * 30)}`,
+            `Shots: ${Math.floor(Math.random() * 200)}`,
+            `Tackles: ${Math.floor(Math.random() * 100)}`,
+            `Passes: ${Math.floor(Math.random() * 150)}`,
+            `Saves: ${Math.floor(Math.random() * 50)}`,
+            `Fouls: ${Math.floor(Math.random() * 20)}`,
+            `Yellow Cards: ${Math.floor(Math.random() * 5)}`,
+            `Red Cards: ${Math.floor(Math.random() * 2)}`,
+          ];
+          return stats[Math.floor(Math.random() * stats.length)];
+        }
+
+        document.querySelectorAll(".stats").forEach((statsContainer) => {
+          const numberOfStats = 10;
+          for (let i = 0; i < numberOfStats; i++) {
+            const p = document.createElement("p");
+            p.textContent = getRandomStat();
+            statsContainer.appendChild(p);
+          }
+        });
+      });
+
+      function changeborder(event) {
+        event.target.style.border = "2px solid blue";
+      }
+    </script>
+  </body>
+</html>
